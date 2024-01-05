@@ -1,10 +1,10 @@
 const CONFIG = {
   // profile setting (required)
   profile: {
-    name: "davidchong",
+    name: "david chong",
     image: "/avatar.svg", // If you want to create your own notion avatar, check out https://notion-avatar.vercel.app
     role: "software engineer",
-    bio: "i love ",
+    bio: "i love boba tea",
     email: "davidcjw@gmail.com",
     linkedin: "davidcjw",
     github: "davidcjw",
@@ -18,12 +18,12 @@ const CONFIG = {
   ],
   // blog setting (required)
   blog: {
-    title: "davidsblog",
-    description: "welcome to david's blog",
+    title: "when life gives you lemons, make boba tea",
+    description: "welcome to david's life",
   },
 
   // CONFIG configration (required)
-  link: "https://morethan-40lrfm9as-davidcjws-projects.vercel.app",
+  link: "https://davidcjw.com",
   since: 2024, // If leave this empty, current year will be used.
   lang: "en-US", // ['en-US', 'zh-CN', 'zh-HK', 'zh-TW', 'ja-JP', 'es-ES', 'ko-KR']
   ogImageGenerateURL: "https://og-image-korean.vercel.app", // The link to generate OG image, don't end with a slash
