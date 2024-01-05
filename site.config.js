@@ -3,8 +3,8 @@ const CONFIG = {
   profile: {
     name: "david chong",
     image: "/avatar.svg", // If you want to create your own notion avatar, check out https://notion-avatar.vercel.app
-    role: "software engineer",
-    bio: "i love boba tea",
+    role: "machine learning engineer",
+    bio: "i love durians",
     email: "davidcjw@gmail.com",
     linkedin: "davidcjw",
     github: "davidcjw",
@@ -18,7 +18,7 @@ const CONFIG = {
   ],
   // blog setting (required)
   blog: {
-    title: "when life gives you lemons, make boba tea",
+    title: "when life gives you lemons, eat durians",
     description: "welcome to david's life",
   },
 
