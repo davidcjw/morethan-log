@@ -22,6 +22,15 @@ const ServiceCard: React.FC = () => {
             <AiFillCodeSandboxCircle className="icon" />
             <div className="name">{CONFIG.projects[0].name}</div>
           </a>
+          <a
+          key={idx}
+          href={`${project.href}`}
+          rel="noreferrer"
+          target="_blank"
+        >
+          <AiOutlineCoffee className="icon" />
+          <div className="name">{CONFIG.projects[0].name}</div>
+        </a>
         ))}
       </StyledWrapper>
     </>

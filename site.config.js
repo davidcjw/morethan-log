@@ -15,6 +15,10 @@ const CONFIG = {
       name: `medium blog`,
       href: "https://medium.com/@davidcjw",
     },
+    {
+      name: `buy me a coffee`,
+      href: "https://www.buymeacoffee.com/davidcjw",
+    }
   ],
   // blog setting (required)
   blog: {
