@@ -20,8 +20,10 @@ const RootLayout = ({ children }: Props) => {
       {/* // TODO: replace react query */}
       {/* {metaConfig.type !== "Paper" && <Header />} */}
       <Header fullWidth={false} />
-      <StyledMain>{children}</StyledMain>
-      <Analytics />
+      <StyledMain>
+        {children}
+        <Analytics />
+      </StyledMain>
     </ThemeProvider>
   )
 }
