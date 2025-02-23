@@ -5,7 +5,7 @@ import Header from "./Header"
 import styled from "@emotion/styled"
 import Scripts from "src/layouts/RootLayout/Scripts"
 import useGtagEffect from "./useGtagEffect"
-import { Analytics } from '@vercel/analytics/next';
+import { Analytics } from '@vercel/analytics/react';
 
 type Props = {
   children: ReactNode
