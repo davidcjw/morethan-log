@@ -5,6 +5,7 @@ import Header from "./Header"
 import styled from "@emotion/styled"
 import Scripts from "src/layouts/RootLayout/Scripts"
 import useGtagEffect from "./useGtagEffect"
+import { Analytics } from '@vercel/analytics/next';
 
 type Props = {
   children: ReactNode
@@ -20,6 +21,7 @@ const RootLayout = ({ children }: Props) => {
       {/* {metaConfig.type !== "Paper" && <Header />} */}
       <Header fullWidth={false} />
       <StyledMain>{children}</StyledMain>
+      <Analytics />
     </ThemeProvider>
   )
 }
