@@ -1,4 +1,4 @@
-import { getTextContent, getDateValue } from "notion-utils"
+import { getBlockValue, getTextContent, getDateValue } from "notion-utils"
 import { NotionAPI } from "notion-client"
 import { BlockMap, CollectionPropertySchemaMap } from "notion-types"
 import { customMapImageUrl } from "./customMapImageUrl"
@@ -9,7 +9,8 @@ async function getPageProperties(
   schema: CollectionPropertySchemaMap
 ) {
   const api = new NotionAPI()
-  const rawProperties = Object.entries(block?.[id]?.value?.properties || [])
+  const pageValue = getBlockValue(block?.[id])
+  const rawProperties = Object.entries(pageValue?.properties || [])
   const excludeProperties = ["date", "select", "multi_select", "person", "file"]
   const properties: any = {}
   for (let i = 0; i < rawProperties.length; i++) {
@@ -21,9 +22,8 @@ async function getPageProperties(
       switch (schema[key]?.type) {
         case "file": {
           try {
-            const Block = block?.[id].value
             const url: string = val[0][1][0][1]
-            const newurl = customMapImageUrl(url, Block)
+            const newurl = customMapImageUrl(url, pageValue!)
             properties[schema[key].name] = newurl
           } catch (error) {
             properties[schema[key].name] = undefined
@@ -61,12 +61,12 @@ async function getPageProperties(
               const resValue =
                 res?.recordMapWithRoles?.notion_user?.[userId[1]]?.value
               const user = {
-                id: resValue?.id,
+                id: resValue?.id ?? "",
                 name:
                   resValue?.name ||
-                  `${resValue?.family_name}${resValue?.given_name}` ||
-                  undefined,
-                profile_photo: resValue?.profile_photo || null,
+                  `${resValue?.family_name ?? ""}${resValue?.given_name ?? ""}` ||
+                  "",
+                profile_photo: resValue?.profile_photo ?? null,
               }
               users.push(user)
             }
