@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://davidcjw.com</loc><lastmod>2026-04-10T16:18:30.286Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://davidcjw.com/docs</loc><lastmod>2026-04-10T16:18:30.287Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://davidcjw.com/hot-to-make-sitemap-in-next-js</loc><lastmod>2026-04-10T16:18:30.287Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://davidcjw.com/apollo-gettings-started-mutate</loc><lastmod>2026-04-10T16:18:30.287Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://davidcjw.com/apollo-gettings-started-query</loc><lastmod>2026-04-10T16:18:30.288Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://davidcjw.com/resume</loc><lastmod>2026-04-10T16:18:30.288Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://davidcjw.com/resume2</loc><lastmod>2026-04-10T16:18:30.288Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://davidcjw.com/about-graphql</loc><lastmod>2026-04-10T16:18:30.288Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://davidcjw.com/how-to-apply-ga-to-next.js</loc><lastmod>2026-04-10T16:18:30.288Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://davidcjw.com/about-opensource-license</loc><lastmod>2026-04-10T16:18:30.288Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://davidcjw.com/about</loc><lastmod>2026-04-10T16:18:30.288Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://davidcjw.com</loc><lastmod>2026-04-10T17:05:24.346Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://davidcjw.com/feed</loc><lastmod>2026-04-10T17:05:24.348Z</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+<url><loc>https://davidcjw.com/what-actually-makes-a-home-smart</loc><lastmod>2026-04-10T17:05:24.347Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://davidcjw.com/10-smart-home-fundamentals-to-get-right-before-you-buy-anything</loc><lastmod>2026-04-10T17:05:24.347Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://davidcjw.com/smart-home-wiring-in-singapore-neutral-wires-switch-boxes-and-what-to-check-before-renovating</loc><lastmod>2026-04-10T17:05:24.347Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://davidcjw.com/how-to-build-a-reliable-smart-home-wi-fi-network-in-a-singapore-hdb-flat</loc><lastmod>2026-04-10T17:05:24.348Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://davidcjw.com/matter-vs-thread-vs-zigbee-vs-wi-fi-how-to-choose-the-right-smart-home-stack</loc><lastmod>2026-04-10T17:05:24.348Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://davidcjw.com/how-id-build-a-future-proof-smart-home-in-a-singapore-hdb-flat</loc><lastmod>2026-04-10T17:05:24.348Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://davidcjw.com/the-best-non-tuya-smart-home-setup-for-singapore-in-2026</loc><lastmod>2026-04-10T17:05:24.348Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://davidcjw.com/aqara-is-good-but-how-open-is-open-enough</loc><lastmod>2026-04-10T17:05:24.348Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://davidcjw.com/why-tuya-took-over-smart-homes-and-why-power-users-still-avoid-it</loc><lastmod>2026-04-10T17:05:24.348Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://davidcjw.com/welcome</loc><lastmod>2026-04-10T17:05:24.348Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://davidcjw.com/resume</loc><lastmod>2026-04-10T17:05:24.348Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://davidcjw.com/about</loc><lastmod>2026-04-10T17:05:24.348Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 </urlset>

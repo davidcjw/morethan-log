@@ -63,13 +63,29 @@ const DetailPage: NextPageWithLayout = () => {
 
   const date = post.date?.start_date || post.createdTime || ""
 
+  const isoDate = new Date(date).toISOString()
+  const pageUrl = `${CONFIG.link}/${post.slug}`
+
   const meta = {
     title: post.title,
-    date: new Date(date).toISOString(),
+    date: isoDate,
     image: image,
     description: post.summary || "",
     type: post.type[0],
-    url: `${CONFIG.link}/${post.slug}`,
+    url: pageUrl,
+    jsonLd: {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.summary || "",
+      url: pageUrl,
+      datePublished: isoDate,
+      author: {
+        "@type": "Person",
+        name: CONFIG.profile.name,
+      },
+      ...(image ? { image: [image] } : {}),
+    },
   }
 
   return (

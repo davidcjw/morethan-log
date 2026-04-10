@@ -4,7 +4,7 @@ const CONFIG = {
     name: "david chong",
     image: "/avatar.svg", // If you want to create your own notion avatar, check out https://notion-avatar.vercel.app
     role: "software engineer",
-    bio: "i love durians",
+    bio: "i love durians and all things smart home",
     email: "davidcjw@gmail.com",
     linkedin: "davidcjw",
     github: "davidcjw",
@@ -39,19 +39,19 @@ const CONFIG = {
 
   // plugin configuration (optional)
   googleAnalytics: {
-    enable: false,
+    enable: Boolean(process.env.NEXT_PUBLIC_GOOGLE_MEASUREMENT_ID),
     config: {
       measurementId: process.env.NEXT_PUBLIC_GOOGLE_MEASUREMENT_ID || "",
     },
   },
   googleSearchConsole: {
-    enable: false,
+    enable: Boolean(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION),
     config: {
       siteVerification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "",
     },
   },
   naverSearchAdvisor: {
-    enable: false,
+    enable: Boolean(process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION),
     config: {
       siteVerification: process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION || "",
     },

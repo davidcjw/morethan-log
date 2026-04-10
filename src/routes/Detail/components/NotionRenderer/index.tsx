@@ -16,9 +16,8 @@ import "katex/dist/katex.min.css"
 import { FC } from "react"
 import styled from "@emotion/styled"
 
-const _NotionRenderer = dynamic(
-  () => import("react-notion-x").then((m) => m.NotionRenderer),
-  { ssr: false }
+const _NotionRenderer = dynamic(() =>
+  import("react-notion-x").then((m) => m.NotionRenderer)
 )
 
 const Code = dynamic(() =>

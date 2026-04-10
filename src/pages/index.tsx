@@ -27,6 +27,13 @@ const FeedPage: NextPageWithLayout = () => {
     description: CONFIG.blog.description,
     type: "website",
     url: CONFIG.link,
+    jsonLd: {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: CONFIG.blog.title,
+      description: CONFIG.blog.description,
+      url: CONFIG.link,
+    },
   }
 
   return (
