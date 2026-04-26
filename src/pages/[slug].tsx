@@ -6,9 +6,8 @@ import CustomError from "src/routes/Error"
 import { getRecordMap, getPosts } from "src/apis"
 import MetaConfig from "src/components/MetaConfig"
 import { GetStaticProps } from "next"
-import { queryClient } from "src/libs/react-query"
 import { queryKey } from "src/constants/queryKey"
-import { dehydrate } from "@tanstack/react-query"
+import { dehydrate, QueryClient } from "@tanstack/react-query"
 import usePostQuery from "src/hooks/usePostQuery"
 import { FilterPostsOptions } from "src/libs/utils/notion/filterPosts"
 
@@ -31,12 +30,18 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const slug = context.params?.slug
 
   const posts = await getPosts()
-  const feedPosts = filterPosts(posts)
-  await queryClient.prefetchQuery(queryKey.posts(), () => feedPosts)
-
   const detailPosts = filterPosts(posts, filter)
   const postDetail = detailPosts.find((t: any) => t.slug === slug)
+
+  if (!postDetail) {
+    return {
+      notFound: true,
+      revalidate: CONFIG.revalidateTime,
+    }
+  }
+
   const recordMap = await getRecordMap(postDetail?.id!)
+  const queryClient = new QueryClient()
 
   await queryClient.prefetchQuery(queryKey.post(`${slug}`), () => ({
     ...postDetail,
@@ -57,8 +62,7 @@ const DetailPage: NextPageWithLayout = () => {
   if (!post) return <CustomError />
 
   const image =
-    post.thumbnail ??
-    CONFIG.ogImageGenerateURL ??
+    post.thumbnail ||
     `${CONFIG.ogImageGenerateURL}/${encodeURIComponent(post.title)}.png`
 
   const date = post.date?.start_date || post.createdTime || ""

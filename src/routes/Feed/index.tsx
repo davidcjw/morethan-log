@@ -3,6 +3,7 @@ import { useState } from "react"
 import SearchInput from "./SearchInput"
 import { FeedHeader } from "./FeedHeader"
 import Footer from "./Footer"
+import { CONFIG } from "site.config"
 import styled from "@emotion/styled"
 import TagList from "./TagList"
 import MobileProfileCard from "./MobileProfileCard"
@@ -29,6 +30,7 @@ const Feed: React.FC<Props> = () => {
         <TagList />
       </div>
       <div className="mid">
+        <h1 className="page-title">{CONFIG.blog.title}</h1>
         <MobileProfileCard />
         <SearchInput value={q} onChange={(e) => setQ(e.target.value)} />
         <div className="tags">
@@ -91,6 +93,19 @@ const StyledWrapper = styled.div`
 
   > .mid {
     grid-column: span 12 / span 12;
+
+    > .page-title {
+      margin: 0 0 1rem;
+      font-size: 1.5rem;
+      line-height: 2rem;
+      font-weight: 700;
+
+      @media (min-width: 768px) {
+        margin-bottom: 1.5rem;
+        font-size: 1.75rem;
+        line-height: 2.25rem;
+      }
+    }
 
     @media (min-width: 1024px) {
       grid-column: span 7 / span 7;

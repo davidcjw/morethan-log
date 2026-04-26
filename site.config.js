@@ -22,8 +22,8 @@ const CONFIG = {
   ],
   // blog setting (required)
   blog: {
-    title: "when life gives you lemons, eat durians",
-    description: "welcome to david's life",
+    title: "David's Smart Home Notes and Everything In Between",
+    description: "Practical smart home guides for Singapore HDBs, covering Matter, Thread, Zigbee, Wi-Fi, Home Assistant, privacy, and reliable setup.",
   },
 
   // CONFIG configration (required)

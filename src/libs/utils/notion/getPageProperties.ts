@@ -2,6 +2,9 @@ import { getBlockValue, getTextContent, getDateValue } from "notion-utils"
 import { NotionAPI } from "notion-client"
 import { BlockMap, CollectionPropertySchemaMap } from "notion-types"
 import { customMapImageUrl } from "./customMapImageUrl"
+import { runNotionRequest } from "src/apis/notion-client/request"
+
+const missingUserWarnings = new Set<string>()
 
 async function getPageProperties(
   id: string,
@@ -57,14 +60,31 @@ async function getPageProperties(
           for (let i = 0; i < rawUsers.length; i++) {
             if (rawUsers[i][0][1]) {
               const userId = rawUsers[i][0]
-              const res: any = await api.getUsers(userId)
+              const label = Array.isArray(userId)
+                ? userId.join(":")
+                : String(userId)
+              let res: any
+              try {
+                res = await runNotionRequest(
+                  `getUsers:${label}`,
+                  () => api.getUsers(userId),
+                  { maxRetries: 3 }
+                )
+              } catch {
+                if (!missingUserWarnings.has(label)) {
+                  console.warn(`missing user ${label}`)
+                  missingUserWarnings.add(label)
+                }
+              }
               const resValue =
                 res?.recordMapWithRoles?.notion_user?.[userId[1]]?.value
               const user = {
                 id: resValue?.id ?? "",
                 name:
                   resValue?.name ||
-                  `${resValue?.family_name ?? ""}${resValue?.given_name ?? ""}` ||
+                  `${resValue?.family_name ?? ""}${
+                    resValue?.given_name ?? ""
+                  }` ||
                   "",
                 profile_photo: resValue?.profile_photo ?? null,
               }

@@ -5,17 +5,21 @@ import { getBlockValue, idToUuid } from "notion-utils"
 import getAllPageIds from "src/libs/utils/notion/getAllPageIds"
 import getPageProperties from "src/libs/utils/notion/getPageProperties"
 import { TPosts } from "src/types"
+import { runNotionRequest } from "./request"
+
+const POSTS_CACHE_TTL_MS = 30 * 60 * 1000
+let postsCache: { expiresAt: number; promise: Promise<TPosts> } | null = null
 
 /**
  * @param {{ includePages: boolean }} - false: posts only / true: include pages
  */
 
 // TODO: react query를 사용해서 처음 불러온 뒤로는 해당데이터만 사용하도록 수정
-export const getPosts = async () => {
+async function loadPosts() {
   let id = CONFIG.notionConfig.pageId as string
   const api = new NotionAPI()
 
-  const response = await api.getPage(id)
+  const response = await runNotionRequest("getPosts", () => api.getPage(id))
   id = idToUuid(id)
   const collection = getBlockValue(Object.values(response.collection)[0])
   const block = response.block
@@ -39,9 +43,7 @@ export const getPosts = async () => {
         (await getPageProperties(id, block, schema ?? {})) || null
       // Add fullwidth, createdtime to properties
       const pageBlock = getBlockValue(block[id])
-      properties.createdTime = new Date(
-        pageBlock?.created_time ?? 0
-      ).toString()
+      properties.createdTime = new Date(pageBlock?.created_time ?? 0).toString()
       properties.fullWidth =
         (pageBlock?.format as any)?.page_full_width ?? false
 
@@ -58,4 +60,25 @@ export const getPosts = async () => {
     const posts = data as TPosts
     return posts
   }
+}
+
+export const getPosts = async () => {
+  const now = Date.now()
+  if (postsCache && postsCache.expiresAt > now) {
+    return postsCache.promise
+  }
+
+  const promise = loadPosts().catch((error) => {
+    if (postsCache?.promise === promise) {
+      postsCache = null
+    }
+    throw error
+  })
+
+  postsCache = {
+    expiresAt: now + POSTS_CACHE_TTL_MS,
+    promise,
+  }
+
+  return promise
 }
