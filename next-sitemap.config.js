@@ -42,6 +42,15 @@ function getPostsFromStaticProps(filePath) {
   }
 }
 
+function getHubPostsFromStaticProps(filePath) {
+  try {
+    const data = JSON.parse(fs.readFileSync(filePath, "utf8"))
+    return data?.pageProps?.posts || []
+  } catch {
+    return []
+  }
+}
+
 function getLastmodLookup() {
   if (lastmodByPath) return lastmodByPath
 
@@ -73,6 +82,24 @@ function getLastmodLookup() {
         .at(-1)
 
       if (latest) lastmodByPath["/"] = latest
+      continue
+    }
+
+    const hubPosts = getHubPostsFromStaticProps(filePath)
+    if (hubPosts.length) {
+      const latest = hubPosts
+        .map((item) =>
+          toIsoDate(
+            item.updatedTime || item.date?.start_date || item.createdTime
+          )
+        )
+        .filter(Boolean)
+        .sort()
+        .at(-1)
+
+      if (latest) {
+        lastmodByPath[`/${file.replace(/\.json$/, "")}`] = latest
+      }
     }
   }
 

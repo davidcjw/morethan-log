@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 <url><loc>https://davidcjw.com</loc><lastmod>2026-04-28T00:45:22.371Z</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-<url><loc>https://davidcjw.com/feed</loc><lastmod>2026-04-28T00:49:18.777Z</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+<url><loc>https://davidcjw.com/feed</loc><lastmod>2026-04-28T01:23:24.441Z</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+<url><loc>https://davidcjw.com/hdb-smart-home-guide</loc><lastmod>2026-04-28T00:45:22.371Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>https://davidcjw.com/matter-thread-zigbee-wifi</loc><lastmod>2026-04-27T17:49:34.459Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>https://davidcjw.com/smart-home-singapore</loc><lastmod>2026-04-28T00:45:22.371Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
 <url><loc>https://davidcjw.com/how-to-wire-a-home-network-in-a-singapore-hdb-bto-tp-ont-router-mesh-aps-and-switches</loc><lastmod>2026-04-27T17:49:34.459Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
 <url><loc>https://davidcjw.com/the-best-security-cameras-for-smart-homes-in-singapore-hdb-flats</loc><lastmod>2026-04-25T18:16:52.133Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
 <url><loc>https://davidcjw.com/apple-home-in-singapore-the-best-hdb-strategy-for-doorbells-locks-gate-locks-and-cameras</loc><lastmod>2026-04-15T10:18:34.579Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>

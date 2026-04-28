@@ -5,6 +5,7 @@ import { FeedHeader } from "./FeedHeader"
 import Footer from "./Footer"
 import { CONFIG } from "site.config"
 import styled from "@emotion/styled"
+import GuideList from "./GuideList"
 import TagList from "./TagList"
 import MobileProfileCard from "./MobileProfileCard"
 import ProfileCard from "./ProfileCard"
@@ -27,6 +28,7 @@ const Feed: React.FC<Props> = () => {
           height: `calc(100vh - ${HEADER_HEIGHT}px)`,
         }}
       >
+        <GuideList />
         <TagList />
       </div>
       <div className="mid">
@@ -34,6 +36,7 @@ const Feed: React.FC<Props> = () => {
         <MobileProfileCard />
         <SearchInput value={q} onChange={(e) => setQ(e.target.value)} />
         <div className="tags">
+          <GuideList />
           <TagList />
         </div>
         <FeedHeader />

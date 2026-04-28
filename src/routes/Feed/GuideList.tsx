@@ -1,58 +1,37 @@
 import styled from "@emotion/styled"
+import Link from "next/link"
 import { useRouter } from "next/router"
 import React from "react"
 import { Emoji } from "src/components/Emoji"
-import { useTagsQuery } from "src/hooks/useTagsQuery"
+import { HUB_LIST } from "src/libs/hub-config"
 
 type Props = {}
 
-const TagList: React.FC<Props> = () => {
+const GuideList: React.FC<Props> = () => {
   const router = useRouter()
-  const currentTag = router.query.tag || undefined
-  const data = useTagsQuery()
-
-  const handleClickTag = (value: any) => {
-    // delete
-    if (currentTag === value) {
-      router.push({
-        query: {
-          ...router.query,
-          tag: undefined,
-        },
-      })
-    }
-    // add
-    else {
-      router.push({
-        query: {
-          ...router.query,
-          tag: value,
-        },
-      })
-    }
-  }
+  const currentPath = router.asPath.split("?")[0]
 
   return (
     <StyledWrapper>
       <div className="top">
-        <Emoji>🏷️</Emoji> Tags
+        <Emoji>📚</Emoji> Guides
       </div>
       <div className="list">
-        {Object.keys(data).map((key) => (
-          <a
-            key={key}
-            data-active={key === currentTag}
-            onClick={() => handleClickTag(key)}
-          >
-            {key}
-          </a>
-        ))}
+        {HUB_LIST.map((hub) => {
+          const href = `/${hub.slug}`
+
+          return (
+            <Link key={hub.slug} href={href} data-active={href === currentPath}>
+              {hub.title}
+            </Link>
+          )
+        })}
       </div>
     </StyledWrapper>
   )
 }
 
-export default TagList
+export default GuideList
 
 const StyledWrapper = styled.div`
   .top {
@@ -94,6 +73,7 @@ const StyledWrapper = styled.div`
       :hover {
         background-color: ${({ theme }) => theme.colors.gray4};
       }
+
       &[data-active="true"] {
         color: ${({ theme }) => theme.colors.gray12};
         background-color: ${({ theme }) => theme.colors.gray4};
