@@ -4,9 +4,10 @@ import Head from "next/head"
 export type MetaConfigProps = {
   title: string
   description: string
-  /** Notion type (Post, Paper, Page) or "website" for site root */
+  /** Open Graph / schema hint, e.g. website, BlogPosting, AboutPage, ProfilePage */
   type: string
   date?: string
+  modifiedDate?: string
   image?: string
   /** Canonical page URL (defaults to `url` when omitted) */
   url: string
@@ -18,8 +19,10 @@ export type MetaConfigProps = {
 /** Open Graph expects `website` or `article`, not Notion labels. */
 export function getOgType(pageType: string): "website" | "article" {
   const t = pageType.toLowerCase()
-  if (t === "website") return "website"
-  return "article"
+  if (t === "post" || t === "article" || t === "blogposting") {
+    return "article"
+  }
+  return "website"
 }
 
 function toOgLocale(lang: string): string {
@@ -60,6 +63,12 @@ const MetaConfig: React.FC<MetaConfigProps> = (props) => {
       {ogType === "article" && props.date && (
         <>
           <meta property="article:published_time" content={props.date} />
+          {props.modifiedDate && (
+            <meta
+              property="article:modified_time"
+              content={props.modifiedDate}
+            />
+          )}
           <meta property="article:author" content={CONFIG.profile.name} />
         </>
       )}

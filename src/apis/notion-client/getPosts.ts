@@ -43,7 +43,10 @@ async function loadPosts() {
         (await getPageProperties(id, block, schema ?? {})) || null
       // Add fullwidth, createdtime to properties
       const pageBlock = getBlockValue(block[id])
-      properties.createdTime = new Date(pageBlock?.created_time ?? 0).toString()
+      const createdTime = pageBlock?.created_time ?? 0
+      const updatedTime = pageBlock?.last_edited_time ?? createdTime
+      properties.createdTime = new Date(createdTime).toString()
+      properties.updatedTime = new Date(updatedTime).toISOString()
       properties.fullWidth =
         (pageBlock?.format as any)?.page_full_width ?? false
 

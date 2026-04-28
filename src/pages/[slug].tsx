@@ -10,10 +10,33 @@ import { queryKey } from "src/constants/queryKey"
 import { dehydrate, QueryClient } from "@tanstack/react-query"
 import usePostQuery from "src/hooks/usePostQuery"
 import { FilterPostsOptions } from "src/libs/utils/notion/filterPosts"
+import { TPost } from "src/types"
 
 const filter: FilterPostsOptions = {
   acceptStatus: ["Public", "PublicOnDetail"],
   acceptType: ["Paper", "Post", "Page"],
+}
+
+function getSchemaType(post: TPost) {
+  if (post.slug === "about") return "AboutPage"
+  if (post.slug === "resume") return "ProfilePage"
+  if (post.type[0] === "Post") return "BlogPosting"
+  return "WebPage"
+}
+
+function getAuthorJsonLd() {
+  const sameAs = [
+    CONFIG.profile.github && `https://github.com/${CONFIG.profile.github}`,
+    CONFIG.profile.linkedin &&
+      `https://www.linkedin.com/in/${CONFIG.profile.linkedin}`,
+  ].filter(Boolean)
+
+  return {
+    "@type": "Person",
+    name: CONFIG.profile.name,
+    url: CONFIG.link,
+    ...(sameAs.length ? { sameAs } : {}),
+  }
 }
 
 export const getStaticPaths = async () => {
@@ -68,28 +91,45 @@ const DetailPage: NextPageWithLayout = () => {
   const date = post.date?.start_date || post.createdTime || ""
 
   const isoDate = new Date(date).toISOString()
+  const modifiedDate = new Date(post.updatedTime || date).toISOString()
   const pageUrl = `${CONFIG.link}/${post.slug}`
+  const description = post.summary || CONFIG.blog.description
+  const schemaType = getSchemaType(post)
+  const author = getAuthorJsonLd()
+
+  const jsonLd =
+    schemaType === "BlogPosting"
+      ? {
+          "@context": "https://schema.org",
+          "@type": schemaType,
+          headline: post.title,
+          description,
+          url: pageUrl,
+          datePublished: isoDate,
+          dateModified: modifiedDate,
+          author,
+          ...(image ? { image: [image] } : {}),
+        }
+      : {
+          "@context": "https://schema.org",
+          "@type": schemaType,
+          name: post.title,
+          description,
+          url: pageUrl,
+          datePublished: isoDate,
+          dateModified: modifiedDate,
+          ...(schemaType === "ProfilePage" ? { mainEntity: author } : {}),
+        }
 
   const meta = {
     title: post.title,
     date: isoDate,
+    modifiedDate,
     image: image,
-    description: post.summary || "",
-    type: post.type[0],
+    description,
+    type: schemaType,
     url: pageUrl,
-    jsonLd: {
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      headline: post.title,
-      description: post.summary || "",
-      url: pageUrl,
-      datePublished: isoDate,
-      author: {
-        "@type": "Person",
-        name: CONFIG.profile.name,
-      },
-      ...(image ? { image: [image] } : {}),
-    },
+    jsonLd,
   }
 
   return (
