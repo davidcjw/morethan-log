@@ -19,5 +19,14 @@ export default PageDetail
 
 const StyledWrapper = styled.div`
   margin: 0 auto;
+  border: 1px solid ${({ theme }) => theme.colors.gray6};
+  border-radius: 0.5rem;
   max-width: 56rem;
+  padding: 1rem;
+  background-color: ${({ theme }) =>
+    theme.scheme === "light" ? "white" : theme.colors.gray3};
+
+  @media (min-width: 768px) {
+    padding: 2.5rem;
+  }
 `

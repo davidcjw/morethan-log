@@ -2,7 +2,6 @@ import { useRouter } from "next/router"
 import React from "react"
 import { COLOR_SET } from "./constants"
 import styled from "@emotion/styled"
-import { colors } from "src/styles"
 
 export const getColorClassByName = (name: string): string => {
   try {
@@ -32,10 +31,7 @@ const Category: React.FC<Props> = ({ readOnly = false, children }) => {
   return (
     <StyledWrapper
       onClick={() => handleClick(children)}
-      css={{
-        backgroundColor: getColorClassByName(children),
-        cursor: readOnly ? "default" : "pointer",
-      }}
+      data-read-only={readOnly}
     >
       {children}
     </StyledWrapper>
@@ -45,14 +41,20 @@ const Category: React.FC<Props> = ({ readOnly = false, children }) => {
 export default Category
 
 const StyledWrapper = styled.div`
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  border-radius: 9999px;
   width: fit-content;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  opacity: 0.9;
-  color: ${colors.dark.gray1};
+  max-width: 100%;
+  border: 1px solid ${({ theme }) => theme.colors.blue6};
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background-color: ${({ theme }) => theme.colors.blue4};
+  color: ${({ theme }) => theme.colors.blue11};
+  font-size: 0.8125rem;
+  line-height: 1.125rem;
+  font-weight: 800;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+
+  &[data-read-only="true"] {
+    cursor: default;
+  }
 `

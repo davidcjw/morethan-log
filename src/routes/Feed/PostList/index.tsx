@@ -102,7 +102,7 @@ const PostList: React.FC<Props> = ({ q }) => {
       </div>
       <div className="posts">
         {!filteredPosts.length && (
-          <p className="text-gray-500 dark:text-gray-300">Nothing! 😺</p>
+          <p className="empty">No guides match those filters yet.</p>
         )}
         {paginatedPosts.map((post) => (
           <PostCard
@@ -141,13 +141,14 @@ const PostList: React.FC<Props> = ({ q }) => {
 export default PostList
 
 const StyledWrapper = styled.div`
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
   scroll-margin-top: 5rem;
+  min-width: 0;
 
   .list-meta {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.625rem;
     color: ${({ theme }) => theme.colors.gray10};
     font-size: 0.8125rem;
     line-height: 1.125rem;
@@ -155,6 +156,18 @@ const StyledWrapper = styled.div`
 
   .posts {
     min-height: 20rem;
+  }
+
+  .empty {
+    margin: 0;
+    border: 1px solid ${({ theme }) => theme.colors.gray6};
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background-color: ${({ theme }) =>
+      theme.scheme === "light" ? "white" : theme.colors.gray3};
+    color: ${({ theme }) => theme.colors.gray11};
+    font-size: 0.9375rem;
+    line-height: 1.5rem;
   }
 
   .pagination {
@@ -172,10 +185,11 @@ const StyledWrapper = styled.div`
     button {
       border: 1px solid ${({ theme }) => theme.colors.gray6};
       border-radius: 0.5rem;
-      padding: 0.5rem 0.75rem;
+      padding: 0.625rem 0.75rem;
       background-color: ${({ theme }) =>
-        theme.scheme === "light" ? "white" : theme.colors.gray4};
+        theme.scheme === "light" ? "white" : theme.colors.gray3};
       color: ${({ theme }) => theme.colors.gray11};
+      font-weight: 700;
       cursor: pointer;
 
       :hover:not(:disabled) {

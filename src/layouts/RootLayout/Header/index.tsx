@@ -28,29 +28,38 @@ const StyledWrapper = styled.div`
   z-index: ${zIndexes.header};
   position: sticky;
   top: 0;
-  background-color: ${({ theme }) => theme.colors.gray2};
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid ${({ theme }) => theme.colors.gray5};
+  background-color: ${({ theme }) =>
+    theme.scheme === "light"
+      ? "rgba(249, 249, 249, 0.88)"
+      : "rgba(18, 18, 18, 0.86)"};
+  backdrop-filter: blur(16px);
 
   .container {
     display: flex;
+    gap: 1rem;
     padding-left: 1rem;
     padding-right: 1rem;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     max-width: 1120px;
-    height: 3rem;
+    height: 3.75rem;
     margin: 0 auto;
+    min-width: 0;
+
     &[data-full-width="true"] {
       @media (min-width: 768px) {
         padding-left: 6rem;
         padding-right: 6rem;
       }
     }
+
     .nav {
       display: flex;
-      gap: 0.75rem;
+      gap: 0.5rem;
       align-items: center;
+      flex: 0 0 auto;
     }
   }
 `

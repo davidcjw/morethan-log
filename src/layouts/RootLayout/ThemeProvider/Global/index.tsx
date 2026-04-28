@@ -9,6 +9,17 @@ export const Global = () => {
   return (
     <_Global
       styles={css`
+        html,
+        body,
+        #__next {
+          min-height: 100%;
+        }
+
+        html {
+          overflow-x: hidden;
+          scroll-behavior: smooth;
+        }
+
         body {
           margin: 0;
           padding: 0;
@@ -17,11 +28,33 @@ export const Global = () => {
           font-family: ${pretendard.style.fontFamily};
           font-weight: ${pretendard.style.fontWeight};
           font-style: ${pretendard.style.fontStyle};
+          line-height: 1.5;
+          text-rendering: optimizeLegibility;
+          -webkit-font-smoothing: antialiased;
+          overflow-x: hidden;
         }
 
         * {
           color-scheme: ${theme.scheme};
           box-sizing: border-box;
+        }
+
+        main,
+        header,
+        article,
+        section,
+        nav,
+        aside,
+        div {
+          min-width: 0;
+        }
+
+        img,
+        svg,
+        video,
+        canvas,
+        iframe {
+          max-width: 100%;
         }
 
         h1,
@@ -33,11 +66,18 @@ export const Global = () => {
           margin: 0;
           font-weight: inherit;
           font-style: inherit;
+          overflow-wrap: break-word;
         }
 
         a {
           all: unset;
           cursor: pointer;
+          overflow-wrap: break-word;
+        }
+
+        p,
+        li {
+          overflow-wrap: break-word;
         }
 
         ul {
@@ -48,12 +88,14 @@ export const Global = () => {
         button {
           all: unset;
           cursor: pointer;
+          font-family: inherit;
         }
 
         // init input
         input {
           all: unset;
           box-sizing: border-box;
+          font-family: inherit;
         }
 
         // init textarea
@@ -72,6 +114,15 @@ export const Global = () => {
           border: none;
           margin: 0;
           border-top: 1px solid ${theme.colors.gray6};
+        }
+
+        ::selection {
+          background-color: ${theme.colors.blue5};
+        }
+
+        :focus-visible {
+          outline: 2px solid ${theme.colors.blue8};
+          outline-offset: 3px;
         }
       `}
     />

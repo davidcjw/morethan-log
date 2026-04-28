@@ -76,26 +76,30 @@ const HubPage: React.FC<HubPageProps> = ({ hub, hubs, posts }) => {
 export default HubPage
 
 const StyledWrapper = styled.div`
-  padding: 2rem 0 3rem;
-  max-width: 48rem;
+  padding: 1.75rem 0 3rem;
+  max-width: 50rem;
   margin: 0 auto;
+  min-width: 0;
 
   .hero {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
 
     .eyebrow {
       margin-bottom: 0.5rem;
       font-size: 0.875rem;
       line-height: 1.25rem;
-      font-weight: 700;
-      color: ${({ theme }) => theme.colors.gray10};
+      font-weight: 800;
+      color: ${({ theme }) => theme.colors.blue11};
+      text-transform: uppercase;
     }
 
     h1 {
       margin-bottom: 0.75rem;
       font-size: 2rem;
       line-height: 2.5rem;
-      font-weight: 800;
+      font-weight: 850;
+      letter-spacing: 0;
+      overflow-wrap: anywhere;
     }
 
     p {
@@ -115,11 +119,12 @@ const StyledWrapper = styled.div`
 
     span {
       padding: 0.25rem 0.625rem;
-      border-radius: 9999px;
+      border: 1px solid ${({ theme }) => theme.colors.gray6};
+      border-radius: 0.5rem;
       font-size: 0.8125rem;
       line-height: 1.25rem;
       color: ${({ theme }) => theme.colors.gray11};
-      background-color: ${({ theme }) => theme.colors.gray4};
+      background-color: ${({ theme }) => theme.colors.gray3};
     }
   }
 
@@ -133,13 +138,16 @@ const StyledWrapper = styled.div`
     border-bottom: 1px solid ${({ theme }) => theme.colors.gray6};
 
     a {
+      border-radius: 0.5rem;
+      padding: 0.375rem 0.5rem;
       font-size: 0.9375rem;
       line-height: 1.5rem;
-      font-weight: 600;
+      font-weight: 750;
       color: ${({ theme }) => theme.colors.gray12};
 
       :hover {
-        text-decoration: underline;
+        color: ${({ theme }) => theme.colors.blue11};
+        background-color: ${({ theme }) => theme.colors.blue4};
       }
     }
   }
@@ -154,7 +162,7 @@ const StyledWrapper = styled.div`
     h2 {
       font-size: 1.375rem;
       line-height: 2rem;
-      font-weight: 700;
+      font-weight: 850;
     }
 
     p {

@@ -22,15 +22,19 @@ const Tag: React.FC<Props> = ({ children }) => {
 export default Tag
 
 const StyledWrapper = styled.div`
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  border-radius: 50px;
+  border: 1px solid ${({ theme }) => theme.colors.gray6};
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
   font-size: 0.75rem;
-  line-height: 1rem;
-  font-weight: 400;
+  line-height: 1.05rem;
+  font-weight: 600;
   color: ${({ theme }) => theme.colors.gray10};
-  background-color: ${({ theme }) => theme.colors.gray5};
+  background-color: ${({ theme }) => theme.colors.gray3};
   cursor: pointer;
+  overflow-wrap: anywhere;
+
+  :hover {
+    color: ${({ theme }) => theme.colors.gray12};
+    border-color: ${({ theme }) => theme.colors.gray7};
+  }
 `

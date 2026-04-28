@@ -13,7 +13,11 @@ const ThemeToggle: React.FC<Props> = () => {
   }
 
   return (
-    <StyledWrapper onClick={handleClick}>
+    <StyledWrapper
+      type="button"
+      onClick={handleClick}
+      aria-label={`Switch to ${scheme === "light" ? "dark" : "light"} theme`}
+    >
       <Emoji>{scheme === "light" ? "☀️" : "🌙"}</Emoji>
     </StyledWrapper>
   )
@@ -21,6 +25,18 @@ const ThemeToggle: React.FC<Props> = () => {
 
 export default ThemeToggle
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled.button`
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid ${({ theme }) => theme.colors.gray6};
+  border-radius: 0.5rem;
+  background-color: ${({ theme }) =>
+    theme.scheme === "light" ? "white" : theme.colors.gray4};
   cursor: pointer;
+
+  :hover {
+    background-color: ${({ theme }) => theme.colors.gray5};
+  }
 `

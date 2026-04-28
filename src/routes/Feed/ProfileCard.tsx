@@ -17,9 +17,9 @@ const ProfileCard: React.FC<Props> = () => {
           <Image src={CONFIG.profile.image} fill alt="" />
         </div>
         <div className="mid">
-          <div className=" name">{CONFIG.profile.name}</div>
+          <div className="name">{CONFIG.profile.name}</div>
           <div className="role">{CONFIG.profile.role}</div>
-          <div className="text-sm mb-2">{CONFIG.profile.bio}</div>
+          <div className="bio">{CONFIG.profile.bio}</div>
         </div>
       </div>
     </StyledWrapper>
@@ -30,15 +30,19 @@ export default ProfileCard
 
 const StyledWrapper = styled.div`
   > .title {
-    padding: 0.25rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.625rem;
+    color: ${({ theme }) => theme.colors.gray11};
+    font-size: 0.8125rem;
+    line-height: 1.125rem;
+    font-weight: 800;
   }
   > .content {
-    margin-bottom: 2.25rem;
-    border-radius: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid ${({ theme }) => theme.colors.gray6};
+    border-radius: 0.5rem;
     width: 100%;
     background-color: ${({ theme }) =>
-      theme.scheme === "light" ? "white" : theme.colors.gray4};
+      theme.scheme === "light" ? "white" : theme.colors.gray3};
     @media (min-width: 768px) {
       padding: 1rem;
     }
@@ -59,14 +63,14 @@ const StyledWrapper = styled.div`
       padding: 0.5rem;
       flex-direction: column;
       align-items: center;
+      text-align: center;
       .name {
-        font-size: 1.25rem;
-        line-height: 1.75rem;
-        font-style: italic;
-        font-weight: 700;
+        font-size: 1.125rem;
+        line-height: 1.5rem;
+        font-weight: 800;
       }
       .role {
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
         font-size: 0.875rem;
         line-height: 1.25rem;
         color: ${({ theme }) => theme.colors.gray11};
@@ -75,6 +79,7 @@ const StyledWrapper = styled.div`
         margin-bottom: 0.5rem;
         font-size: 0.875rem;
         line-height: 1.25rem;
+        color: ${({ theme }) => theme.colors.gray11};
       }
     }
   }

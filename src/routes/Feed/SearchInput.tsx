@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
-import React, { InputHTMLAttributes, ReactNode } from "react"
-import { Emoji } from "src/components/Emoji"
+import React, { InputHTMLAttributes } from "react"
+import { FiSearch } from "react-icons/fi"
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {}
 
@@ -8,12 +8,13 @@ const SearchInput: React.FC<Props> = ({ ...props }) => {
   return (
     <StyledWrapper>
       <div className="top">
-        <Emoji>🔎</Emoji> Search
+        <FiSearch aria-hidden="true" /> Search guides
       </div>
       <input
         className="mid"
         type="text"
-        placeholder="Search Keyword..."
+        aria-label="Search guides"
+        placeholder="Search Matter, HDB, Wi-Fi, renovation..."
         {...props}
       />
     </StyledWrapper>
@@ -23,23 +24,36 @@ const SearchInput: React.FC<Props> = ({ ...props }) => {
 export default SearchInput
 
 const StyledWrapper = styled.div`
-  margin-bottom: 1rem;
-
-  @media (min-width: 768px) {
-    margin-bottom: 2rem;
-  }
   > .top {
-    padding: 0.25rem;
-    margin-bottom: 0.75rem;
+    display: flex;
+    gap: 0.375rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    color: ${({ theme }) => theme.colors.gray11};
+    font-size: 0.8125rem;
+    line-height: 1.125rem;
+    font-weight: 750;
   }
+
   > .mid {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-    border-radius: 1rem;
-    outline-style: none;
+    display: block;
     width: 100%;
-    background-color: ${({ theme }) => theme.colors.gray4};
+    border: 1px solid ${({ theme }) => theme.colors.gray6};
+    border-radius: 0.5rem;
+    padding: 0.75rem 0.875rem;
+    background-color: ${({ theme }) =>
+      theme.scheme === "light" ? theme.colors.gray1 : theme.colors.gray2};
+    color: ${({ theme }) => theme.colors.gray12};
+    font-size: 0.9375rem;
+    line-height: 1.375rem;
+
+    ::placeholder {
+      color: ${({ theme }) => theme.colors.gray9};
+    }
+
+    :focus {
+      border-color: ${({ theme }) => theme.colors.blue8};
+      box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.blue4};
+    }
   }
 `

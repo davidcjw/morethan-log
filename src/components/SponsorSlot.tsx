@@ -80,8 +80,12 @@ const StyledWrapper = styled.aside`
     border: 1px solid ${({ theme }) => theme.colors.gray6};
     border-radius: 0.5rem;
     background-color: ${({ theme }) =>
-      theme.scheme === "light" ? "white" : theme.colors.gray4};
+      theme.scheme === "light" ? "white" : theme.colors.gray3};
     color: ${({ theme }) => theme.colors.gray12};
+
+    :hover {
+      border-color: ${({ theme }) => theme.colors.gray7};
+    }
   }
 
   .media {
@@ -103,6 +107,7 @@ const StyledWrapper = styled.aside`
     color: ${({ theme }) => theme.colors.gray10};
     font-size: 0.6875rem;
     line-height: 1rem;
+    font-weight: 800;
     text-transform: uppercase;
   }
 

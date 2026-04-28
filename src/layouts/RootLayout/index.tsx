@@ -33,6 +33,16 @@ export default RootLayout
 const StyledMain = styled.main`
   margin: 0 auto;
   width: 100%;
-  max-width: 1120px;
+  max-width: min(1120px, 100%);
+  min-width: 0;
+  overflow-x: hidden;
   padding: 0 1rem;
+
+  @media (min-width: 768px) {
+    padding: 0 1.25rem;
+  }
+
+  @media (max-width: 640px) {
+    max-width: 24rem;
+  }
 `

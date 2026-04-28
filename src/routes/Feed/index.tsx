@@ -15,7 +15,7 @@ import PostList from "./PostList"
 import SponsorSlot from "src/components/SponsorSlot"
 import AdvertiseCard from "src/components/AdvertiseCard"
 
-const HEADER_HEIGHT = 73
+const HEADER_HEIGHT = 60
 
 type Props = {}
 
@@ -34,15 +34,19 @@ const Feed: React.FC<Props> = () => {
         <TagList />
       </div>
       <div className="mid">
-        <h1 className="page-title">{CONFIG.blog.title}</h1>
-        <MobileProfileCard />
-        <SearchInput value={q} onChange={(e) => setQ(e.target.value)} />
-        <div className="tags">
-          <GuideList />
-          <TagList />
-        </div>
+        <section className="feed-hero" aria-labelledby="feed-title">
+          <div className="eyebrow">Singapore smart home field notes</div>
+          <h1 id="feed-title">{CONFIG.blog.title}</h1>
+          <p>{CONFIG.blog.description}</p>
+          <SearchInput value={q} onChange={(e) => setQ(e.target.value)} />
+          <div className="mobile-index">
+            <GuideList />
+            <TagList />
+          </div>
+        </section>
         <FeedHeader />
         <PostList q={q} />
+        <MobileProfileCard />
         <div className="footer">
           <Footer />
         </div>
@@ -71,13 +75,14 @@ export default Feed
 const StyledWrapper = styled.div`
   grid-template-columns: repeat(12, minmax(0, 1fr));
 
-  padding: 2rem 0;
+  padding: 1.5rem 0 2.5rem;
   display: grid;
-  gap: 1.5rem;
+  gap: 1.25rem;
+  min-width: 0;
 
   @media (max-width: 768px) {
     display: block;
-    padding: 0.5rem 0;
+    padding: 1rem 0 2rem;
   }
 
   > .lt {
@@ -100,26 +105,62 @@ const StyledWrapper = styled.div`
 
   > .mid {
     grid-column: span 12 / span 12;
-
-    > .page-title {
-      margin: 0 0 1rem;
-      font-size: 1.5rem;
-      line-height: 2rem;
-      font-weight: 700;
-
-      @media (min-width: 768px) {
-        margin-bottom: 1.5rem;
-        font-size: 1.75rem;
-        line-height: 2.25rem;
-      }
-    }
+    min-width: 0;
 
     @media (min-width: 1024px) {
       grid-column: span 7 / span 7;
     }
 
-    > .tags {
-      display: block;
+    > .feed-hero {
+      margin-bottom: 1rem;
+      border: 1px solid ${({ theme }) => theme.colors.gray6};
+      border-radius: 0.5rem;
+      padding: 1rem;
+      max-width: 100%;
+      overflow: hidden;
+      background-color: ${({ theme }) =>
+        theme.scheme === "light" ? "white" : theme.colors.gray3};
+
+      .eyebrow {
+        margin-bottom: 0.5rem;
+        color: ${({ theme }) => theme.colors.blue11};
+        font-size: 0.75rem;
+        line-height: 1rem;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        max-width: 40rem;
+        font-size: 1.65rem;
+        line-height: 2.05rem;
+        font-weight: 850;
+        letter-spacing: 0;
+        overflow-wrap: anywhere;
+      }
+
+      p {
+        margin: 0.75rem 0 1rem;
+        max-width: 40rem;
+        color: ${({ theme }) => theme.colors.gray11};
+        font-size: 0.9375rem;
+        line-height: 1.625rem;
+        overflow-wrap: anywhere;
+      }
+
+      @media (min-width: 1024px) {
+        margin-bottom: 1.25rem;
+        padding: 1.25rem;
+
+        h1 {
+          font-size: 2rem;
+          line-height: 2.5rem;
+        }
+      }
+    }
+
+    .mobile-index {
+      max-width: 100%;
 
       @media (min-width: 1024px) {
         display: none;
@@ -145,6 +186,7 @@ const StyledWrapper = styled.div`
     overflow: scroll;
     position: sticky;
     top: ${HEADER_HEIGHT - 10}px;
+    min-width: 0;
 
     @media (min-width: 1024px) {
       display: block;

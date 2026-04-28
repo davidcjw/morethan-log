@@ -68,18 +68,31 @@ export default PostHeader
 
 const StyledWrapper = styled.div`
   .title {
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-    font-weight: 700;
+    font-size: 2rem;
+    line-height: 2.35rem;
+    font-weight: 850;
+    letter-spacing: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+
+    @media (max-width: 480px) {
+      font-size: 1.55rem;
+      line-height: 1.9rem;
+    }
   }
   nav {
-    margin-top: 1.5rem;
+    margin-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.gray6};
     color: ${({ theme }) => theme.colors.gray11};
     > .top {
       display: flex;
-      margin-bottom: 0.75rem;
-      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.875rem;
+      gap: 0.5rem 0.75rem;
       align-items: center;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
       .author {
         display: flex;
         gap: 0.5rem;
@@ -104,19 +117,21 @@ const StyledWrapper = styled.div`
       display: flex;
       margin-bottom: 1rem;
       align-items: center;
+      min-width: 0;
       .tags {
         display: flex;
-        overflow-x: auto;
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
         gap: 0.5rem;
         max-width: 100%;
+        min-width: 0;
       }
     }
     .thumbnail {
       overflow: hidden;
       position: relative;
       margin-bottom: 1.75rem;
-      border-radius: 1.5rem;
+      border: 1px solid ${({ theme }) => theme.colors.gray6};
+      border-radius: 0.5rem;
       width: 100%;
       background-color: ${({ theme }) => theme.colors.gray4};
       padding-bottom: 66%;

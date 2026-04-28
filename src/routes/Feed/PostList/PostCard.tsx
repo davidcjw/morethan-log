@@ -20,11 +20,6 @@ const PostCard: React.FC<Props> = ({ data, viewCount, viewsEnabled }) => {
   return (
     <StyledWrapper href={`/${data.slug}`}>
       <article>
-        {category && (
-          <div className="category">
-            <Category>{category}</Category>
-          </div>
-        )}
         {data.thumbnail && (
           <div className="thumbnail">
             <Image
@@ -36,16 +31,14 @@ const PostCard: React.FC<Props> = ({ data, viewCount, viewsEnabled }) => {
           </div>
         )}
         <div data-thumb={!!data.thumbnail} className="content">
-          <header className="top">
-            <h2>{data.title}</h2>
-          </header>
-          <div className="date">
-            <div className="content">
+          <div className="meta">
+            {category && <Category readOnly>{category}</Category>}
+            <span className="date">
               {formatDate(
                 data?.date?.start_date || data.createdTime,
                 CONFIG.lang
               )}
-            </div>
+            </span>
             {viewsEnabled && typeof viewCount === "number" && (
               <ViewCount
                 slug={data.slug}
@@ -55,9 +48,10 @@ const PostCard: React.FC<Props> = ({ data, viewCount, viewsEnabled }) => {
               />
             )}
           </div>
-          <div className="summary">
-            <p>{data.summary}</p>
-          </div>
+          <header className="top">
+            <h2>{data.title}</h2>
+          </header>
+          {data.summary && <p className="summary">{data.summary}</p>}
           <div className="tags">
             {data.tags &&
               data.tags.map((tag: string, idx: number) => (
@@ -73,30 +67,30 @@ const PostCard: React.FC<Props> = ({ data, viewCount, viewsEnabled }) => {
 export default PostCard
 
 const StyledWrapper = styled(Link)`
+  display: block;
+
   article {
     overflow: hidden;
     position: relative;
-    margin-bottom: 1.5rem;
-    border-radius: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid ${({ theme }) => theme.colors.gray6};
+    border-radius: 0.5rem;
     background-color: ${({ theme }) =>
-      theme.scheme === "light" ? "white" : theme.colors.gray4};
-    transition-property: box-shadow;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 300ms;
+      theme.scheme === "light" ? "white" : theme.colors.gray3};
+    transition: border-color 180ms ease, box-shadow 180ms ease,
+      transform 180ms ease;
 
     @media (min-width: 768px) {
-      margin-bottom: 2rem;
+      margin-bottom: 1.25rem;
     }
 
     :hover {
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-        0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    }
-    > .category {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      z-index: 10;
+      border-color: ${({ theme }) => theme.colors.gray7};
+      box-shadow: ${({ theme }) =>
+        theme.scheme === "light"
+          ? "0 14px 36px rgba(0, 0, 0, 0.08)"
+          : "0 14px 36px rgba(0, 0, 0, 0.24)"};
+      transform: translateY(-1px);
     }
 
     > .thumbnail {
@@ -106,68 +100,62 @@ const StyledWrapper = styled(Link)`
       padding-bottom: 66%;
 
       @media (min-width: 1024px) {
-        padding-bottom: 50%;
+        padding-bottom: 46%;
       }
     }
     > .content {
       padding: 1rem;
+      min-width: 0;
 
       &[data-thumb="false"] {
-        padding-top: 3.5rem;
+        padding-top: 1rem;
+      }
+
+      > .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        align-items: center;
+        margin-bottom: 0.75rem;
+
+        .date {
+          color: ${({ theme }) => theme.colors.gray10};
+          font-size: 0.8125rem;
+          line-height: 1.125rem;
+        }
       }
       > .top {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        min-width: 0;
 
-        @media (min-width: 768px) {
-          flex-direction: row;
-          align-items: baseline;
-        }
         h2 {
-          margin-bottom: 0.5rem;
           font-size: 1.125rem;
-          line-height: 1.75rem;
-          font-weight: 500;
-
+          line-height: 1.55rem;
+          font-weight: 800;
+          letter-spacing: 0;
           cursor: pointer;
+          overflow-wrap: anywhere;
 
           @media (min-width: 768px) {
-            font-size: 1.25rem;
+            font-size: 1.1875rem;
             line-height: 1.75rem;
           }
         }
       }
-      > .date {
-        display: flex;
-        margin-bottom: 1rem;
-        gap: 0.5rem;
-        align-items: center;
-        flex-wrap: wrap;
-        .content {
-          font-size: 0.875rem;
-          line-height: 1.25rem;
-          color: ${({ theme }) => theme.colors.gray10};
-          @media (min-width: 768px) {
-            margin-left: 0;
-          }
-        }
-      }
       > .summary {
-        margin-bottom: 1rem;
-        p {
-          display: none;
-          line-height: 2rem;
-          color: ${({ theme }) => theme.colors.gray11};
-
-          @media (min-width: 768px) {
-            display: block;
-          }
-        }
+        display: -webkit-box;
+        margin: 0.5rem 0 0.875rem;
+        color: ${({ theme }) => theme.colors.gray11};
+        font-size: 0.9375rem;
+        line-height: 1.55rem;
+        overflow: hidden;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
       }
       > .tags {
         display: flex;
+        flex-wrap: wrap;
         gap: 0.5rem;
+        min-width: 0;
       }
     }
   }

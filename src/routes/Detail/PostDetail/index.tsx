@@ -70,9 +70,10 @@ const StyledWrapper = styled.div`
   display: grid;
   justify-content: center;
   align-items: start;
-  gap: 1.5rem;
+  gap: 1.25rem;
   margin: 0 auto;
   max-width: 72rem;
+  min-width: 0;
 
   @media (min-width: 1024px) {
     grid-template-columns: minmax(0, 42rem) 16rem;
@@ -80,17 +81,22 @@ const StyledWrapper = styled.div`
 
   > .post-shell {
     margin: 0 auto;
-    border-radius: 1rem;
+    border: 1px solid ${({ theme }) => theme.colors.gray6};
+    border-radius: 0.5rem;
     width: 100%;
-    max-width: 42rem;
+    min-width: 0;
+    max-width: min(42rem, 100%);
+    overflow: hidden;
     background-color: ${({ theme }) =>
-      theme.scheme === "light" ? "white" : theme.colors.gray4};
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08),
-      0 2px 4px -1px rgba(0, 0, 0, 0.05);
-    padding: 1.25rem;
+      theme.scheme === "light" ? "white" : theme.colors.gray3};
+    box-shadow: ${({ theme }) =>
+      theme.scheme === "light"
+        ? "0 12px 36px rgba(0, 0, 0, 0.05)"
+        : "0 12px 36px rgba(0, 0, 0, 0.22)"};
+    padding: 1rem;
 
     @media (min-width: 768px) {
-      padding: 3rem;
+      padding: 2.5rem;
     }
   }
 
@@ -121,7 +127,7 @@ const StyledWrapper = styled.div`
     @media (min-width: 1024px) {
       display: grid;
       position: sticky;
-      top: 6rem;
+      top: 5rem;
       gap: 1rem;
     }
   }
@@ -133,6 +139,6 @@ const StyledWrapper = styled.div`
     border-radius: 0.5rem;
     padding: 1rem;
     background-color: ${({ theme }) =>
-      theme.scheme === "light" ? "white" : theme.colors.gray4};
+      theme.scheme === "light" ? "white" : theme.colors.gray3};
   }
 `

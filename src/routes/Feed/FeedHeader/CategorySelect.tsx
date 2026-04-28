@@ -26,7 +26,8 @@ const CategorySelect: React.FC<Props> = () => {
   return (
     <StyledWrapper>
       <div ref={dropdownRef} className="wrapper" onClick={handleOpen}>
-        {currentCategory} Posts <MdExpandMore />
+        <span>{currentCategory} Posts</span>
+        <MdExpandMore aria-hidden="true" />
       </div>
       {opened && (
         <div className="content">
@@ -49,37 +50,54 @@ export default CategorySelect
 
 const StyledWrapper = styled.div`
   position: relative;
+  min-width: 0;
+
   > .wrapper {
     display: flex;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    gap: 0.25rem;
+    gap: 0.375rem;
     align-items: center;
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-    font-weight: 700;
+    min-width: 0;
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.375rem 0.25rem 0;
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+    font-weight: 800;
     cursor: pointer;
+
+    span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    :hover {
+      color: ${({ theme }) => theme.colors.blue11};
+    }
   }
+
   > .content {
     position: absolute;
     z-index: 40;
-    padding: 0.25rem;
-    border-radius: 0.75rem;
-    background-color: ${({ theme }) => theme.colors.gray2};
-    color: ${({ theme }) => theme.colors.gray10};
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-      0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    top: calc(100% + 0.5rem);
+    min-width: 14rem;
+    border: 1px solid ${({ theme }) => theme.colors.gray6};
+    border-radius: 0.5rem;
+    padding: 0.375rem;
+    background-color: ${({ theme }) =>
+      theme.scheme === "light" ? "white" : theme.colors.gray3};
+    color: ${({ theme }) => theme.colors.gray11};
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
+
     > .item {
-      padding: 0.25rem;
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
-      border-radius: 0.75rem;
+      padding: 0.5rem 0.625rem;
+      border-radius: 0.375rem;
       font-size: 0.875rem;
       line-height: 1.25rem;
       white-space: nowrap;
       cursor: pointer;
 
       :hover {
+        color: ${({ theme }) => theme.colors.gray12};
         background-color: ${({ theme }) => theme.colors.gray4};
       }
     }

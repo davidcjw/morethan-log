@@ -20,11 +20,16 @@ export default Footer
 
 const StyledWrapper = styled.div`
   display: flex;
+  gap: 1rem;
   justify-content: space-between;
-  font-weight: 500;
+  border-top: 1px solid ${({ theme }) => theme.colors.gray6};
+  padding-top: 1.25rem;
+  font-weight: 700;
   color: ${({ theme }) => theme.colors.gray10};
+
   a {
-    margin-top: 0.5rem;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0;
     cursor: pointer;
 
     :hover {

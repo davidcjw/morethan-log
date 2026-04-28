@@ -113,11 +113,193 @@ const NotionRenderer: FC<Props> = ({ recordMap }) => {
 export default NotionRenderer
 
 const StyledWrapper = styled.div`
+  width: 100%;
+  min-width: 0;
+  color: ${({ theme }) => theme.colors.gray12};
+
   /* // TODO: why render? */
   .notion-collection-page-properties {
     display: none !important;
   }
+
+  .notion,
   .notion-page {
-    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding: 0 !important;
+    color: inherit;
+    font-family: inherit;
+  }
+
+  .notion * {
+    max-width: 100%;
+  }
+
+  .notion-page-content {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding: 0 !important;
+  }
+
+  .notion-text,
+  .notion-list,
+  .notion-quote,
+  .notion-callout,
+  .notion-table,
+  .notion-code,
+  .notion-bookmark,
+  .notion-asset-wrapper,
+  .notion-row {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .notion-text {
+    margin: 0.8rem 0;
+    color: ${({ theme }) => theme.colors.gray12};
+    font-size: 1rem;
+    line-height: 1.8rem;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .notion-h,
+  .notion-h1,
+  .notion-h2,
+  .notion-h3 {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    color: ${({ theme }) => theme.colors.gray12};
+    font-weight: 850;
+    letter-spacing: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .notion-h1 {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+  }
+
+  .notion-h2 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .notion-h3 {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  .notion-hash-link {
+    display: none;
+  }
+
+  .notion-link {
+    color: ${({ theme }) => theme.colors.blue11};
+    text-decoration: underline;
+    text-decoration-color: ${({ theme }) => theme.colors.blue7};
+    text-underline-offset: 0.18em;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .notion-semantic-string {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .notion-list {
+    margin: 0.35rem 0;
+    padding-left: 1.35rem;
+    color: ${({ theme }) => theme.colors.gray12};
+    line-height: 1.75rem;
+  }
+
+  .notion-list li,
+  .notion-list-disc,
+  .notion-list-numbered {
+    overflow-wrap: anywhere;
+  }
+
+  .notion-hr {
+    margin: 1.75rem 0;
+    border-color: ${({ theme }) => theme.colors.gray6};
+  }
+
+  .notion-callout {
+    margin: 1.25rem 0;
+    border: 1px solid ${({ theme }) => theme.colors.gray6};
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background-color: ${({ theme }) => theme.colors.gray2};
+    overflow: hidden;
+  }
+
+  .notion-callout-text {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .notion-quote {
+    margin: 1.25rem 0;
+    border-left: 3px solid ${({ theme }) => theme.colors.blue8};
+    padding: 0.25rem 0 0.25rem 1rem;
+    color: ${({ theme }) => theme.colors.gray11};
+  }
+
+  .notion-code {
+    overflow-x: auto;
+    border-radius: 0.5rem;
+    max-width: 100%;
+  }
+
+  .notion-code code,
+  code {
+    overflow-wrap: anywhere;
+  }
+
+  .notion-table,
+  .notion-simple-table {
+    display: block;
+    overflow-x: auto;
+    max-width: 100%;
+  }
+
+  .notion-bookmark {
+    overflow: hidden;
+    border: 1px solid ${({ theme }) => theme.colors.gray6};
+    border-radius: 0.5rem;
+  }
+
+  .notion-asset-wrapper {
+    overflow: hidden;
+    border-radius: 0.5rem;
+  }
+
+  @media (max-width: 480px) {
+    .notion-text {
+      font-size: 0.96875rem;
+      line-height: 1.7rem;
+    }
+
+    .notion-h1 {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
+
+    .notion-h2 {
+      font-size: 1.3125rem;
+      line-height: 1.85rem;
+    }
+
+    .notion-h3 {
+      font-size: 1.125rem;
+      line-height: 1.625rem;
+    }
   }
 `

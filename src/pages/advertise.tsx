@@ -97,7 +97,8 @@ const StyledWrapper = styled.div`
   gap: 2rem;
   margin: 0 auto;
   max-width: 56rem;
-  padding: 3rem 0 4rem;
+  min-width: 0;
+  padding: 2rem 0 4rem;
 
   .intro {
     span {
@@ -114,7 +115,8 @@ const StyledWrapper = styled.div`
       color: ${({ theme }) => theme.colors.gray12};
       font-size: 2rem;
       line-height: 2.5rem;
-      font-weight: 800;
+      font-weight: 850;
+      letter-spacing: 0;
     }
 
     p {
@@ -136,7 +138,7 @@ const StyledWrapper = styled.div`
       color: white;
       font-size: 0.9375rem;
       line-height: 1.25rem;
-      font-weight: 700;
+      font-weight: 800;
 
       :hover {
         background-color: ${({ theme }) => theme.colors.blue10};
@@ -157,7 +159,11 @@ const StyledWrapper = styled.div`
       border-radius: 0.5rem;
       padding: 1.25rem;
       background-color: ${({ theme }) =>
-        theme.scheme === "light" ? "white" : theme.colors.gray4};
+        theme.scheme === "light" ? "white" : theme.colors.gray3};
+
+      :hover {
+        border-color: ${({ theme }) => theme.colors.gray7};
+      }
 
       > span {
         color: ${({ theme }) => theme.colors.gray10};
@@ -170,7 +176,7 @@ const StyledWrapper = styled.div`
         color: ${({ theme }) => theme.colors.gray12};
         font-size: 1.125rem;
         line-height: 1.5rem;
-        font-weight: 700;
+        font-weight: 800;
       }
 
       .price {
@@ -210,7 +216,7 @@ const StyledWrapper = styled.div`
       color: ${({ theme }) => theme.colors.gray12};
       font-size: 1.25rem;
       line-height: 1.75rem;
-      font-weight: 700;
+      font-weight: 850;
     }
 
     p {
