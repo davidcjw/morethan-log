@@ -6,12 +6,15 @@ import { TPost } from "../../../types"
 import Image from "next/image"
 import Category from "../../../components/Category"
 import styled from "@emotion/styled"
+import ViewCount from "src/components/ViewCount"
 
 type Props = {
   data: TPost
+  viewCount?: number
+  viewsEnabled?: boolean
 }
 
-const PostCard: React.FC<Props> = ({ data }) => {
+const PostCard: React.FC<Props> = ({ data, viewCount, viewsEnabled }) => {
   const category = (data.category && data.category?.[0]) || undefined
 
   return (
@@ -43,6 +46,14 @@ const PostCard: React.FC<Props> = ({ data }) => {
                 CONFIG.lang
               )}
             </div>
+            {viewsEnabled && typeof viewCount === "number" && (
+              <ViewCount
+                slug={data.slug}
+                count={viewCount}
+                enabled={viewsEnabled}
+                compact
+              />
+            )}
           </div>
           <div className="summary">
             <p>{data.summary}</p>
@@ -132,6 +143,7 @@ const StyledWrapper = styled(Link)`
         margin-bottom: 1rem;
         gap: 0.5rem;
         align-items: center;
+        flex-wrap: wrap;
         .content {
           font-size: 0.875rem;
           line-height: 1.25rem;

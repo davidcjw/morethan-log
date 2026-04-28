@@ -12,6 +12,8 @@ import ProfileCard from "./ProfileCard"
 import ServiceCard from "./ServiceCard"
 import ContactCard from "./ContactCard"
 import PostList from "./PostList"
+import SponsorSlot from "src/components/SponsorSlot"
+import AdvertiseCard from "src/components/AdvertiseCard"
 
 const HEADER_HEIGHT = 73
 
@@ -53,6 +55,8 @@ const Feed: React.FC<Props> = () => {
       >
         <ProfileCard />
         <ServiceCard />
+        <SponsorSlot placement="feed" />
+        <AdvertiseCard />
         <ContactCard />
         <div className="footer">
           <Footer />

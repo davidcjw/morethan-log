@@ -3,7 +3,6 @@ import { ReactCusdis } from "react-cusdis"
 import { useCallback, useEffect, useState } from "react"
 import styled from "@emotion/styled"
 import useScheme from "src/hooks/useScheme"
-import { useRouter } from "next/router"
 
 type Props = {
   id: string
@@ -39,7 +38,7 @@ const Cusdis: React.FC<Props> = ({ id, slug, title }) => {
 
   return (
     <>
-      <StyledWrapper id="comments">
+      <StyledWrapper>
         <ReactCusdis
           key={value}
           attrs={{

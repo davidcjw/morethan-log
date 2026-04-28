@@ -1,15 +1,33 @@
 import styled from "@emotion/styled"
 import { useRouter } from "next/router"
-import React from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import { Emoji } from "src/components/Emoji"
 import { useTagsQuery } from "src/hooks/useTagsQuery"
 
 type Props = {}
 
+const VISIBLE_TAG_COUNT = 10
+
 const TagList: React.FC<Props> = () => {
   const router = useRouter()
-  const currentTag = router.query.tag || undefined
+  const currentTag =
+    typeof router.query.tag === "string" ? router.query.tag : undefined
   const data = useTagsQuery()
+  const [expanded, setExpanded] = useState(false)
+  const sortedTags = useMemo(
+    () =>
+      Object.entries(data).sort((a, b) => {
+        if (b[1] !== a[1]) return b[1] - a[1]
+        return a[0].localeCompare(b[0])
+      }),
+    [data]
+  )
+  const visibleTags = expanded
+    ? sortedTags
+    : sortedTags.slice(0, VISIBLE_TAG_COUNT)
+  const hasMoreTags = sortedTags.length > VISIBLE_TAG_COUNT
+  const hiddenTagCount = Math.max(0, sortedTags.length - VISIBLE_TAG_COUNT)
+  const currentTagVisible = visibleTags.some(([tag]) => tag === currentTag)
 
   const handleClickTag = (value: any) => {
     // delete
@@ -32,21 +50,33 @@ const TagList: React.FC<Props> = () => {
     }
   }
 
+  useEffect(() => {
+    if (currentTag && !currentTagVisible) {
+      setExpanded(true)
+    }
+  }, [currentTag, currentTagVisible])
+
   return (
     <StyledWrapper>
       <div className="top">
         <Emoji>🏷️</Emoji> Tags
       </div>
       <div className="list">
-        {Object.keys(data).map((key) => (
+        {visibleTags.map(([key, count]) => (
           <a
             key={key}
             data-active={key === currentTag}
             onClick={() => handleClickTag(key)}
           >
-            {key}
+            <span>{key}</span>
+            <span className="count">{count}</span>
           </a>
         ))}
+        {hasMoreTags && (
+          <button type="button" onClick={() => setExpanded((value) => !value)}>
+            {expanded ? "Show fewer" : `Show ${hiddenTagCount} more`}
+          </button>
+        )}
       </div>
     </StyledWrapper>
   )
@@ -77,19 +107,24 @@ const StyledWrapper = styled.div`
       display: block;
     }
 
-    a {
+    a,
+    button {
       display: block;
       padding: 0.25rem;
       padding-left: 1rem;
       padding-right: 1rem;
       margin-top: 0.25rem;
       margin-bottom: 0.25rem;
+      border: 0;
       border-radius: 0.75rem;
+      background: transparent;
       font-size: 0.875rem;
       line-height: 1.25rem;
       color: ${({ theme }) => theme.colors.gray10};
       flex-shrink: 0;
       cursor: pointer;
+      font-family: inherit;
+      text-align: left;
 
       :hover {
         background-color: ${({ theme }) => theme.colors.gray4};
@@ -102,6 +137,18 @@ const StyledWrapper = styled.div`
           background-color: ${({ theme }) => theme.colors.gray4};
         }
       }
+
+      .count {
+        margin-left: 0.5rem;
+        color: ${({ theme }) => theme.colors.gray9};
+        font-size: 0.75rem;
+        line-height: 1rem;
+      }
+    }
+
+    button {
+      color: ${({ theme }) => theme.colors.blue11};
+      font-weight: 700;
     }
   }
 `

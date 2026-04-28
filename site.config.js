@@ -18,7 +18,7 @@ const CONFIG = {
     {
       name: `buy me a coffee`,
       href: "https://www.buymeacoffee.com/davidcjw",
-    }
+    },
   ],
   // blog setting (required)
   blog: {
@@ -65,11 +65,48 @@ const CONFIG = {
     },
   },
   cusdis: {
-    enable: false,
+    enable: Boolean(process.env.NEXT_PUBLIC_CUSDIS_APP_ID),
     config: {
       host: "https://cusdis.com",
-      appid: "", // Embed Code -> data-app-id value
+      appid: process.env.NEXT_PUBLIC_CUSDIS_APP_ID || "", // Embed Code -> data-app-id value
     },
+  },
+  ads: {
+    enabled: true,
+    sponsors: [
+      // Example approved sponsor:
+      // {
+      //   id: "smart-home-partner",
+      //   title: "Smart Home Partner",
+      //   description: "Trusted Matter and Zigbee gear for Singapore homes.",
+      //   href: "https://example.com",
+      //   image: "/sponsors/smart-home-partner.png",
+      //   label: "Advertisement",
+      //   placements: ["sidebar", "article", "feed"],
+      //   startsAt: "2026-01-01",
+      //   endsAt: "2026-12-31",
+      // },
+    ],
+    packages: [
+      {
+        id: "sidebar",
+        name: "Sidebar sponsorship",
+        price: "Monthly placement",
+        placement: "Post sidebar and homepage rail",
+        description:
+          "A compact sponsor card beside long-form smart home guides.",
+        href: process.env.NEXT_PUBLIC_STRIPE_SPONSOR_SIDEBAR_LINK || "",
+      },
+      {
+        id: "article",
+        name: "Article sponsorship",
+        price: "Monthly placement",
+        placement: "Inline article slot",
+        description:
+          "A clearly labeled sponsor block inside post pages for readers already engaged with the guide.",
+        href: process.env.NEXT_PUBLIC_STRIPE_SPONSOR_ARTICLE_LINK || "",
+      },
+    ],
   },
   isProd: process.env.VERCEL_ENV === "production", // distinguish between development and production environment (ref: https://vercel.com/docs/environment-variables#system-environment-variables)
   revalidateTime: 21600 * 7, // revalidate time for [slug], index

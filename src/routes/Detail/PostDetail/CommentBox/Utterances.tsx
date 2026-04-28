@@ -17,7 +17,7 @@ const Utterances: React.FC<Props> = ({ issueTerm }) => {
   useEffect(() => {
     const theme = scheme === "light" ? "github-light" : "github-dark"
     const script = document.createElement("script")
-    const anchor = document.getElementById("comments")
+    const anchor = document.getElementById("utterances-comments")
     if (!anchor) return
 
     script.setAttribute("src", "https://utteranc.es/client.js")
@@ -33,10 +33,10 @@ const Utterances: React.FC<Props> = ({ issueTerm }) => {
     return () => {
       anchor.innerHTML = ""
     }
-  }, [scheme, router])
+  }, [issueTerm, router, scheme])
   return (
     <>
-      <StyledWrapper id="comments">
+      <StyledWrapper id="utterances-comments">
         <div className="utterances-frame"></div>
       </StyledWrapper>
     </>
