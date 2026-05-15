@@ -1,8 +1,18 @@
 import { CONFIG } from "site.config"
 import React from "react"
-import { AiFillCodeSandboxCircle } from "react-icons/ai"
+import {
+  AiOutlineCalculator,
+  AiOutlineFilePdf,
+  AiOutlineLink,
+} from "react-icons/ai"
 import styled from "@emotion/styled"
 import { Emoji } from "src/components/Emoji"
+
+const SERVICE_ICONS = {
+  calculator: AiOutlineCalculator,
+  link: AiOutlineLink,
+  pdf: AiOutlineFilePdf,
+}
 
 const ServiceCard: React.FC = () => {
   if (!CONFIG.projects) return null
@@ -12,17 +22,28 @@ const ServiceCard: React.FC = () => {
         <Emoji>🌟</Emoji> Service
       </StyledTitle>
       <StyledWrapper>
-        {CONFIG.projects.map((project, idx) => (
-          <a
-            key={idx}
-            href={`${project.href}`}
-            rel="noreferrer"
-            target="_blank"
-          >
-            <AiFillCodeSandboxCircle className="icon" />
-            <div className="name">{CONFIG.projects[idx].name}</div>
-          </a>
-        ))}
+        {CONFIG.projects.map((project, idx) => {
+          const Icon =
+            SERVICE_ICONS[project.icon as keyof typeof SERVICE_ICONS] ||
+            AiOutlineLink
+
+          return (
+            <a
+              key={idx}
+              href={`${project.href}`}
+              rel="noreferrer"
+              target="_blank"
+            >
+              <Icon className="icon" />
+              <div className="content">
+                <div className="name">{project.name}</div>
+                {project.description && (
+                  <div className="description">{project.description}</div>
+                )}
+              </div>
+            </a>
+          )
+        })}
       </StyledWrapper>
     </>
   )
@@ -64,11 +85,28 @@ const StyledWrapper = styled.div`
     .icon {
       font-size: 1.5rem;
       line-height: 2rem;
+      flex: 0 0 auto;
+    }
+    .content {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      gap: 0.125rem;
+    }
+    .name,
+    .description {
+      min-width: 0;
+      overflow-wrap: anywhere;
     }
     .name {
       font-size: 0.875rem;
       line-height: 1.25rem;
-      min-width: 0;
+      font-weight: 700;
+    }
+    .description {
+      color: ${({ theme }) => theme.colors.gray10};
+      font-size: 0.75rem;
+      line-height: 1rem;
     }
   }
 `

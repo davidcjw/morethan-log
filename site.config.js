@@ -14,10 +14,32 @@ const CONFIG = {
     {
       name: `medium blog`,
       href: "https://medium.com/@davidcjw",
+      description: "medium.com/@davidcjw",
+      icon: "link",
     },
     {
       name: `buy me a coffee`,
       href: "https://www.buymeacoffee.com/davidcjw",
+      description: "buymeacoffee.com/davidcjw",
+      icon: "link",
+    },
+    {
+      name: "PDF Link",
+      href: "https://pdflink.app",
+      description: "pdflink.app",
+      icon: "pdf",
+    },
+    {
+      name: "SG Retirement Planner",
+      href: "https://sgretirementplanner.davidcjw.com",
+      description: "sgretirementplanner.davidcjw.com",
+      icon: "calculator",
+    },
+    {
+      name: "IPPT calculator",
+      href: "https://ippt.davidcjw.com",
+      description: "ippt.davidcjw.com",
+      icon: "calculator",
     },
   ],
   // blog setting (required)
