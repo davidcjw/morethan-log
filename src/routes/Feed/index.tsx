@@ -21,6 +21,7 @@ type Props = {}
 
 const Feed: React.FC<Props> = () => {
   const [q, setQ] = useState("")
+  const [tagExpanded, setTagExpanded] = useState(false)
 
   return (
     <StyledWrapper>
@@ -40,8 +41,7 @@ const Feed: React.FC<Props> = () => {
           <p>{CONFIG.blog.description}</p>
           <SearchInput value={q} onChange={(e) => setQ(e.target.value)} />
           <div className="mobile-index">
-            <GuideList />
-            <TagList />
+            <TagList isExpanded={tagExpanded} onToggle={() => setTagExpanded(!tagExpanded)} />
           </div>
         </section>
         <FeedHeader />
