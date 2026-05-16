@@ -2,36 +2,67 @@ import styled from "@emotion/styled"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import React from "react"
+import { FiChevronDown } from "react-icons/fi"
 import { Emoji } from "src/components/Emoji"
 import { HUB_LIST } from "src/libs/hub-config"
 
-type Props = {}
+type Props = {
+  isExpanded?: boolean
+  onToggle?: () => void
+}
 
-const GuideList: React.FC<Props> = () => {
+const GuideList: React.FC<Props> = ({ isExpanded = false, onToggle }) => {
   const router = useRouter()
   const currentPath = router.asPath.split("?")[0]
 
   return (
     <StyledWrapper>
-      <div className="top">
+      <div
+        className="top"
+        onClick={onToggle}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault()
+            onToggle?.()
+          }
+        }}
+      >
         <Emoji>📚</Emoji> Guides
+        <ChevronIcon isExpanded={isExpanded} />
       </div>
-      <div className="list">
-        {HUB_LIST.map((hub) => {
-          const href = `/${hub.slug}`
+      {isExpanded && (
+        <div className="list">
+          {HUB_LIST.map((hub) => {
+            const href = `/${hub.slug}`
 
-          return (
-            <Link key={hub.slug} href={href} data-active={href === currentPath}>
-              {hub.title}
-            </Link>
-          )
-        })}
-      </div>
+            return (
+              <Link key={hub.slug} href={href} data-active={href === currentPath}>
+                {hub.title}
+              </Link>
+            )
+          })}
+        </div>
+      )}
     </StyledWrapper>
   )
 }
 
 export default GuideList
+
+const ChevronIcon: React.FC<{ isExpanded: boolean }> = ({ isExpanded }) => (
+  <span
+    css={{
+      display: 'inline-block',
+      marginLeft: '0.375rem',
+      transform: isExpanded ? 'rotate(90deg)' : 'rotate(0deg)',
+      transition: 'transform 150ms ease-out',
+    }}
+  >
+    <FiChevronDown size={16} aria-hidden="true" />
+  </span>
+)
 
 const StyledWrapper = styled.div`
   .top {
@@ -40,6 +71,14 @@ const StyledWrapper = styled.div`
     font-size: 0.8125rem;
     line-height: 1.125rem;
     font-weight: 800;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+
+    @media (min-width: 1024px) {
+      cursor: default;
+    }
   }
 
   .list {
