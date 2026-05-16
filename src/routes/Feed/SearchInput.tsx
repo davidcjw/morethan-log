@@ -8,7 +8,7 @@ const SearchInput: React.FC<Props> = ({ ...props }) => {
   return (
     <StyledWrapper>
       <div className="top">
-        <FiSearch aria-hidden="true" /> Search guides
+        <FiSearch aria-hidden="true" /> Search
       </div>
       <input
         className="mid"

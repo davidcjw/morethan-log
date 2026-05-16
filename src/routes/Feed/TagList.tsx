@@ -10,7 +10,7 @@ type Props = {
   onToggle?: () => void
 }
 
-const VISIBLE_TAG_COUNT = 10
+const VISIBLE_TAG_COUNT = 5
 
 const TagList: React.FC<Props> = ({ isExpanded = false, onToggle }) => {
   const router = useRouter()
