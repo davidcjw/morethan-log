@@ -1,14 +1,18 @@
 import styled from "@emotion/styled"
 import { useRouter } from "next/router"
 import React, { useEffect, useMemo, useState } from "react"
+import { FiChevronDown } from "react-icons/fi"
 import { Emoji } from "src/components/Emoji"
 import { useTagsQuery } from "src/hooks/useTagsQuery"
 
-type Props = {}
+type Props = {
+  isExpanded?: boolean
+  onToggle?: () => void
+}
 
 const VISIBLE_TAG_COUNT = 10
 
-const TagList: React.FC<Props> = () => {
+const TagList: React.FC<Props> = ({ isExpanded = false, onToggle }) => {
   const router = useRouter()
   const currentTag =
     typeof router.query.tag === "string" ? router.query.tag : undefined
@@ -58,9 +62,22 @@ const TagList: React.FC<Props> = () => {
 
   return (
     <StyledWrapper>
-      <div className="top">
+      <div
+        className="top"
+        onClick={onToggle}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault()
+            onToggle?.()
+          }
+        }}
+      >
         <Emoji>🏷️</Emoji> Tags
+        <ChevronIcon isExpanded={isExpanded} />
       </div>
+      {isExpanded && (
       <div className="list">
         {visibleTags.map(([key, count]) => (
           <a
@@ -78,11 +95,25 @@ const TagList: React.FC<Props> = () => {
           </button>
         )}
       </div>
+      )}
     </StyledWrapper>
   )
 }
 
 export default TagList
+
+const ChevronIcon: React.FC<{ isExpanded: boolean }> = ({ isExpanded }) => (
+  <span
+    css={{
+      display: 'inline-block',
+      marginLeft: '0.375rem',
+      transform: isExpanded ? 'rotate(90deg)' : 'rotate(0deg)',
+      transition: 'transform 150ms ease-out',
+    }}
+  >
+    <FiChevronDown size={16} aria-hidden="true" />
+  </span>
+)
 
 const StyledWrapper = styled.div`
   .top {
@@ -91,6 +122,14 @@ const StyledWrapper = styled.div`
     font-size: 0.8125rem;
     line-height: 1.125rem;
     font-weight: 800;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+
+    @media (min-width: 1024px) {
+      cursor: default;
+    }
   }
 
   .list {
