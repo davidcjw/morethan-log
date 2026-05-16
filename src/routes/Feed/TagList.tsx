@@ -77,8 +77,9 @@ const TagList: React.FC<Props> = ({ isExpanded = false, onToggle }) => {
         <Emoji>🏷️</Emoji> Tags
         <ChevronIcon isExpanded={isExpanded} />
       </div>
-      <div className="list" data-collapsed={!isExpanded}>
-        {(isExpanded ? (expanded ? sortedTags : sortedTags.slice(0, VISIBLE_TAG_COUNT)) : sortedTags.slice(0, VISIBLE_TAG_COUNT)).map(([key, count]) => (
+      {isExpanded && (
+      <div className="list">
+        {(expanded ? sortedTags : sortedTags.slice(0, VISIBLE_TAG_COUNT)).map(([key, count]) => (
           <a
             key={key}
             data-active={key === currentTag}
@@ -88,12 +89,13 @@ const TagList: React.FC<Props> = ({ isExpanded = false, onToggle }) => {
             <span className="count">{count}</span>
           </a>
         ))}
-        {isExpanded && hasMoreTags && (
+        {hasMoreTags && (
           <button type="button" onClick={() => setExpanded((value) => !value)}>
             {expanded ? "Show fewer" : `Show ${hiddenTagCount} more`}
           </button>
         )}
       </div>
+      )}
     </StyledWrapper>
   )
 }
@@ -136,18 +138,12 @@ const StyledWrapper = styled.div`
     margin-bottom: 1rem;
     gap: 0.5rem;
     overflow: visible;
-    pointer-events: auto;
 
     scrollbar-width: none;
     -ms-overflow-style: none;
     ::-webkit-scrollbar {
       width: 0;
       height: 0;
-    }
-
-    &[data-collapsed="true"] {
-      opacity: 0.6;
-      pointer-events: none;
     }
 
     @media (min-width: 1024px) {
